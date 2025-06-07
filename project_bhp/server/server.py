@@ -39,6 +39,6 @@ def predict_home_price():
 if __name__ == "__main__":
     print("Starting python flask sever from home prediction..")
     util.load_saved_artifacts()
-    app.run() ##''')
+    app.run()
 
 
