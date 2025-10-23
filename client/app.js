@@ -19,7 +19,16 @@ function getBathValue() {
     return -1; // Invalid Value
   }
   
-  function onClickedEstimatePrice() {
+  function toCrore(priceInLakhs) {
+    if (priceInLakhs >= 100) {
+        const priceInCrores = priceInLakhs / 100;
+        return { price: priceInCrores.toFixed(2), unit: 'Crore' };
+    } else {
+        return { price: priceInLakhs, unit: 'Lakh' };
+    }
+}
+
+function onClickedEstimatePrice() {
     console.log("Estimate price button clicked");
     var sqft = document.getElementById("uiSqft");
     var bhk = getBHKValue();
@@ -28,7 +37,7 @@ function getBathValue() {
     var estPrice = document.getElementById("uiEstimatedPrice");
   
     // var url = "http://127.0.0.1:5000/predict_home_price"; //Use this if you are NOT using nginx which is first 7 tutorials
-var url = "/predict_home_price"; // Use this if  you are using nginx. i.e tutorial 8 and onwards
+    var url = "/predict_home_price"; // Use this if  you are using nginx. i.e tutorial 8 and onwards
   
     $.post(url, {
         total_sqft: parseFloat(sqft.value),
@@ -37,7 +46,8 @@ var url = "/predict_home_price"; // Use this if  you are using nginx. i.e tutori
         location: location.value
     },function(data, status) {
         console.log(data.estimated_price);
-        estPrice.innerHTML = "<h2>" + data.estimated_price.toString() + " Lakh</h2>";
+        const priceResult = toCrore(data.estimated_price);
+        estPrice.innerHTML = "<h2>" + priceResult.price + " " + priceResult.unit + "</h2>";
         console.log(status);
     });
   }
