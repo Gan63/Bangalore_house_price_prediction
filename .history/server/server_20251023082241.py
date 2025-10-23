@@ -42,7 +42,5 @@ if __name__ == "__main__":
     print("Starting python flask sever from home prediction..")
     util.load_saved_artifacts()
     app.run()
-
-
-
+print(app)
 
