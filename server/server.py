@@ -2,7 +2,10 @@ import os
 port = int(os.environ.get("PORT", 5000))
 print(port)
 from flask import Flask ,request,jsonify
-import util
+try:
+    from . import util
+except ImportError:
+    import util
 import warnings
 warnings.filterwarnings('ignore') 
 
