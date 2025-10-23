@@ -2,17 +2,13 @@ import os
 port = int(os.environ.get("PORT", 5000))
 print(port)
 from flask import Flask ,request,jsonify
-import util
+from .util import util
 import warnings
 warnings.filterwarnings('ignore') 
 
   
  
-app = Flask(__name__, static_folder='../client', static_url_path='')
-
-@app.route('/')
-def index():
-    return app.send_static_file('app.html')
+app = Flask(__name__)
 
 @app.route('/get_location_names')
 def get_location_names():
